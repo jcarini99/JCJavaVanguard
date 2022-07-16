@@ -2,6 +2,9 @@ package com.warehouse.confs;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 
@@ -36,4 +39,27 @@ public class WarehouseDBCreds {
 		}
 	}
 	
+	public static WarehouseDBCreds getInstance() {
+		if(instance == null) {
+			instance = new WarehouseDBCreds();
+			
+		}
+		return instance;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	
+	public Connection getConnection() throws SQLException {
+		return DriverManager.getConnection(url,username,password);
+	}
 }
