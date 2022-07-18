@@ -5,6 +5,7 @@ import java.util.List;
 import com.warehouse.models.Warehouse;
 
 public class MySQLWarehouseDAOImpl implements WarehouseDAO{
+
 	/*
 	 *JDBC Steps:
 	 *	- Load JDBC Driver into memory
@@ -19,6 +20,7 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO{
 	 * @return warehouse_id and warehouse_name  of all Items if found. 
 	 * null returned if item not found
 	 */
+	
 	@Override
 	public List<Warehouse> findAllWarehouses() {
 		// TODO Auto-generated method stub
@@ -38,19 +40,37 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO{
 	}
 
 	@Override
-	public Warehouse save(Warehouse warehouse) {
+	public Warehouse addWarehouse(Warehouse warehouse) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void update(Warehouse warehouse) {
+	public Warehouse addItemToWarehouse(Warehouse warehouse) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateWarehouseName(Warehouse warehouse) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Warehouse warehouse) {
+	public void updateItemQuantity(Warehouse warehouse) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteWarehouse(Warehouse warehouse) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deleteItemInWarehouse(Warehouse warehouse) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -66,6 +86,7 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 
 }
