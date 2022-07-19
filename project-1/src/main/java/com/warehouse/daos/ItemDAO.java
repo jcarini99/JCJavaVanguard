@@ -7,14 +7,16 @@ import com.warehouse.models.Item;
 //Queries specific to Item
 public interface ItemDAO {
 	//CRUD operations
-	
-	public List<Item> findAll();
+	//C
+	public Item createItem(Item item);
+	//R
+	public List<Item> findAllItems();
 	public Item findById(int id);
 	public Item findByName(String name);
-	public Item save(Item item);
-	
-	public void update(Item item);
-	public void delete(Item item);
-	public void delete(int id);
-	public void deleteMany(int[] id);
+	//U
+	public void updateItemName(Item item);
+	//D
+	public void deleteItem(Item item);
+//	public void deleteItem(int id);
+	public void deleteManyItems(int[] id);
 }

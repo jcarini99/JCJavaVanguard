@@ -19,6 +19,13 @@ public class Warehouse {
 		this.itemQuantity = itemQuantity;
 	}
 
+	public Warehouse(String name, int itemId, int itemQuantity) {
+		super();
+		this.name = name;
+		this.itemId = itemId;
+		this.itemQuantity = itemQuantity;
+	}
+	
 	public Warehouse(int warehouseId, String name) {
 		super();
 		this.warehouseId = warehouseId;

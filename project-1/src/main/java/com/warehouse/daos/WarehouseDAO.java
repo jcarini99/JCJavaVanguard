@@ -6,18 +6,17 @@ import com.warehouse.models.Warehouse;
 
 public interface WarehouseDAO {
 
+	//C
+	public Warehouse createWarehouseItem(Warehouse warehouse);
+	//R
 	public List<Warehouse> findAllWarehouses();
-	public Warehouse findById(int id);
+	public Warehouse findById(int warehouse_id);
 	public Warehouse findByName(String name);
-	public Warehouse addWarehouse(Warehouse warehouse);
-	public Warehouse addItemToWarehouse(Warehouse warehouse);
-	
-	
-	public void updateWarehouseName(Warehouse warehouse);
+	//U
 	public void updateItemQuantity(Warehouse warehouse);
-	
+	public void updateWarehouseName(Warehouse warehouse);
+	//D
 	public void deleteWarehouse(Warehouse warehouse);
-	public void deleteItemInWarehouse(Warehouse warehouse);
-	public void delete(int id);
-	public void deleteMany(int[] id);
+//	public void deleteWarehouse(int id);
+	public void deleteManyWarehouses(int[] id);
 }

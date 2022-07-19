@@ -29,7 +29,7 @@ public class MySQLItemDAOImpl implements ItemDAO{
 	 * null returned if item not found
 	 */
 	@Override
-	public List<Item> findAll() {
+	public List<Item> findAllItems() {
 		String sql = "SELECT item_id ID, item_name Name FROM item;";
 		try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
 			//Create PreparedStatement using Connection object
@@ -105,8 +105,8 @@ public class MySQLItemDAOImpl implements ItemDAO{
 
 	//Creates item_name at auto incremented item_id
 	@Override
-	public Item save(Item item) {
-		String sql = "INSERT INTO item (item_name) VALUES (?,?)";
+	public Item createItem(Item item) {
+		String sql = "INSERT INTO item (item_id,item_name) VALUES (?,?)";
 		try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
 			//Start transaction
 			conn.setAutoCommit(false);			
@@ -137,11 +137,11 @@ public class MySQLItemDAOImpl implements ItemDAO{
 
 	//Updates item_name at specified item_id
 	@Override
-	public void update(Item item) {
+	public void updateItemName(Item item) {
 		String sql = "UPDATE item SET item_name = ? WHERE item_id = ?";
 		try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
 			//Start transaction
-			conn.setAutoCommit(false);			
+			conn.setAutoCommit(false);	
 			//Create PreparedStatement using Connection object
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, item.getName());
@@ -159,9 +159,9 @@ public class MySQLItemDAOImpl implements ItemDAO{
 		
 	}
 
-	//Deletes one row at specified item_id
+	//Deletes one row (item) at specified item_id
 	@Override
-	public void delete(Item item) {
+	public void deleteItem(Item item) {
 		String sql = "DELETE FROM item WHERE item_id = ?";
 		try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
 			//Start transaction
@@ -182,32 +182,32 @@ public class MySQLItemDAOImpl implements ItemDAO{
 		
 	}
 
-	//Deletes one row at specified item_id
-	@Override
-	public void delete(int id) {
-		String sql = "DELETE FROM item WHERE item_id = ?";
-		try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
-			//Start transaction
-			conn.setAutoCommit(false);			
-			//Create PreparedStatement using Connection object
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, id);
-			//Exectute update to return int of all rows affected
-			int rowsAffected = ps.executeUpdate();		
-			if(rowsAffected != 0) {
-				conn.commit(); //Execute all queries in transaction if success
-			}else {
-				conn.rollback(); //Undo all queries in transaction if failure
-			}
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
-		
-	}
+	//Deletes one row (item) at specified item_id
+//	@Override
+//	public void deleteItem(int id) {
+//		String sql = "DELETE FROM item WHERE item_id = ?";
+//		try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
+//			//Start transaction
+//			conn.setAutoCommit(false);			
+//			//Create PreparedStatement using Connection object
+//			PreparedStatement ps = conn.prepareStatement(sql);
+//			ps.setInt(1, id);
+//			//Exectute update to return int of all rows affected
+//			int rowsAffected = ps.executeUpdate();		
+//			if(rowsAffected != 0) {
+//				conn.commit(); //Execute all queries in transaction if success
+//			}else {
+//				conn.rollback(); //Undo all queries in transaction if failure
+//			}
+//		} catch(SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//	}
 
-	//Deletes multiple rows at item_id specified by id array
+	//Deletes multiple rows (items) at item_id specified by id array
 	@Override
-	public void deleteMany(int[] id) {
+	public void deleteManyItems(int[] id) {
 		for(int i : id) {
 			String sql = "DELETE FROM item WHERE item_id = ?";
 			try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
