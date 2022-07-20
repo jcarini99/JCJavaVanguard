@@ -31,22 +31,23 @@ public class WarehouseServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// Read Get Request
-		String request = req.getPathInfo();	
-		String[] warehouseArray = request.split("/"); 	// Take everything after /warehouse/add/
-		String result = warehouseArray[1];	// Separate the useful part of array
-		
+		String request = req.getPathInfo();
+		String[] warehouseArray = request.split("/"); // Take everything after /warehouse/add/
+		String result = warehouseArray[1]; // Separate the useful part of array
+
 		// Check if name(string) or id(int) passed (try/catch)
-		try { 	
+		try {
 			int id = Integer.parseInt(result);
 
 			Warehouse warehouse = dao.findById(id);
-			if (warehouse != null) {				
+			if (warehouse != null) {
 				resp.setContentType("application/json"); // Tells Postman that file is JSON
 				resp.getWriter().print(mapper.writeValueAsString(warehouse)); // Use ObjectMapper
 			} else {
 				resp.setStatus(404); // Sets response as not found error
 				resp.getWriter()
-						.print(mapper.writeValueAsString(new NotFound("No warehouse with the provided ID found."))); // Use ObjectMapper
+						.print(mapper.writeValueAsString(new NotFound("No warehouse with the provided ID found."))); // Use
+																														// ObjectMapper
 			}
 		} catch (NumberFormatException e) {
 
@@ -57,7 +58,8 @@ public class WarehouseServlet extends HttpServlet {
 			} else {
 				resp.setStatus(404); // Sets response as not found error
 				resp.getWriter()
-						.print(mapper.writeValueAsString(new NotFound("No warehouse with the provided name found."))); // Use ObjectMapper
+						.print(mapper.writeValueAsString(new NotFound("No warehouse with the provided name found."))); // Use
+																														// ObjectMapper
 			}
 		}
 	}
@@ -69,8 +71,10 @@ public class WarehouseServlet extends HttpServlet {
 		Warehouse warehouse = mapper.readValue(request, Warehouse.class);
 		// Check current storage capacity of warehouse by warehouse_id
 		int currentCapacity = dao.findWarehouseCapacity(warehouse.getWarehouseId());
-		// Compare current capacity to max capacity
-		if (currentCapacity < maxCapacity) {
+		// Calculate impending capacity after Post request
+		int nextCapacity = currentCapacity + warehouse.getItemQuantity();
+		// Compare impending capacity to max capacity
+		if (nextCapacity <= maxCapacity) {
 			warehouse = dao.createWarehouseItem(warehouse);
 			if (warehouse != null) {
 				resp.setContentType("application/json"); // Tells system to read as JSON
@@ -79,12 +83,14 @@ public class WarehouseServlet extends HttpServlet {
 			} else {
 				resp.setStatus(400); // Sets response as invalid request
 				resp.getWriter().print(mapper
-						.writeValueAsString(new NotFound("Error: system could not add new warehouse and/or item."))); // Use ObjectMapper
+						.writeValueAsString(new NotFound("Error: system could not add new warehouse and/or item."))); // Use
+																														// ObjectMapper
 			}
 		} else {
 			resp.setStatus(400); // Sets response as invalid request
 			resp.getWriter().print(
-					mapper.writeValueAsString(new NotFound("Error: Warehouse capacity of 10,000 units reached."))); // Use ObjectMapper
+					mapper.writeValueAsString(new NotFound("Error: Warehouse capacity of 10,000 units reached."))); // Use
+																													// ObjectMapper
 		}
 	}
 
@@ -94,16 +100,23 @@ public class WarehouseServlet extends HttpServlet {
 		InputStream request = req.getInputStream();
 		Warehouse warehouse = mapper.readValue(request, Warehouse.class); // Use ObjectMapper
 		dao.updateWarehouseName(warehouse);
-		dao.updateItemQuantity(warehouse);
+		// Check current storage capacity of warehouse by warehouse_id
+		int currentCapacity = dao.findWarehouseCapacity(warehouse.getWarehouseId());
+		// Compare current capacity to max capacity
+		if (currentCapacity < maxCapacity) {
+			dao.updateItemQuantity(warehouse);
+		} else {
+			resp.setStatus(400); // Sets response as invalid request
+			resp.getWriter().print(
+					mapper.writeValueAsString(new NotFound("Error: Warehouse capacity of 10,000 units reached."))); // Use
+																													// ObjectMapper
+		}
 		if (warehouse != null) {
 			resp.setContentType("application/json"); // Tells Postman that file is JSON
 			resp.getWriter().print(mapper.writeValueAsString(warehouse)); // Use ObjectMapper
 			resp.setStatus(200); // Sets response as successful
-		} else {
-			resp.setStatus(400); // Sets response as invalid request
-			resp.getWriter()
-					.print(mapper.writeValueAsString(new NotFound("Error: system could not change warehouse name."))); // Use ObjectMapper
 		}
+
 	}
 
 	@Override
@@ -112,12 +125,13 @@ public class WarehouseServlet extends HttpServlet {
 		InputStream request = req.getInputStream();
 		Warehouse warehouse = mapper.readValue(request, Warehouse.class); // Use ObjectMapper
 		dao.deleteWarehouse(warehouse);
-		if (warehouse != null) {
+		try {
 			resp.setStatus(200); // Sets response as successful
-		} else {
+		} catch (Exception e) {
 			resp.setStatus(400); // Sets response as invalid request
 			resp.getWriter()
-					.print(mapper.writeValueAsString(new NotFound("Error: system could not delete warehouse."))); // Use ObjectMapper
+					.print(mapper.writeValueAsString(new NotFound("Error: system could not delete warehouse."))); // Use
+																													// ObjectMapper
 		}
 
 	}
