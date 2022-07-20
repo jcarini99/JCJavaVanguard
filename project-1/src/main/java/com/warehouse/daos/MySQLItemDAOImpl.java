@@ -120,11 +120,11 @@ public class MySQLItemDAOImpl implements ItemDAO{
 				ResultSet keys = ps.getGeneratedKeys();
 				// List all generated keys
 				if(keys.next()) {
-					int key = keys.getInt("item_id");
+					int key = keys.getInt(1);
 					item.setId(key);
-					return item;
 				}
 				conn.commit(); //Execute all queries in transaction if success
+				return item;
 			}else {
 				conn.rollback(); //Undo all queries in transaction if failure
 			}
@@ -156,7 +156,6 @@ public class MySQLItemDAOImpl implements ItemDAO{
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	//Deletes one row (item) at specified item_id
@@ -178,8 +177,7 @@ public class MySQLItemDAOImpl implements ItemDAO{
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 
 	//Deletes one row (item) at specified item_id
@@ -206,28 +204,28 @@ public class MySQLItemDAOImpl implements ItemDAO{
 //	}
 
 	//Deletes multiple rows (items) at item_id specified by id array
-	@Override
-	public void deleteManyItems(int[] id) {
-		for(int i : id) {
-			String sql = "DELETE FROM item WHERE item_id = ?";
-			try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
-				//Start transaction
-				conn.setAutoCommit(false);			
-				//Create PreparedStatement using Connection object
-				PreparedStatement ps = conn.prepareStatement(sql);
-				ps.setInt(1, id[i]);
-				//Exectute update to return int of all rows affected
-				int rowsAffected = ps.executeUpdate();		
-				if(rowsAffected != 0) {
-					conn.commit(); //Execute all queries in transaction if success
-				}else {
-					conn.rollback(); //Undo all queries in transaction if failure
-				}
-			} catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		
-	}
+//	@Override
+//	public void deleteManyItems(int[] id) {
+//		for(int i : id) {
+//			String sql = "DELETE FROM item WHERE item_id = ?";
+//			try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
+//				//Start transaction
+//				conn.setAutoCommit(false);			
+//				//Create PreparedStatement using Connection object
+//				PreparedStatement ps = conn.prepareStatement(sql);
+//				ps.setInt(1, id[i]);
+//				//Exectute update to return int of all rows affected
+//				int rowsAffected = ps.executeUpdate();		
+//				if(rowsAffected != 0) {
+//					conn.commit(); //Execute all queries in transaction if success
+//				}else {
+//					conn.rollback(); //Undo all queries in transaction if failure
+//				}
+//			} catch(SQLException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//		
+//	}
 
 }

@@ -18,5 +18,5 @@ public interface ItemDAO {
 	//D
 	public void deleteItem(Item item);
 //	public void deleteItem(int id);
-	public void deleteManyItems(int[] id);
+//	public void deleteManyItems(int[] id);
 }

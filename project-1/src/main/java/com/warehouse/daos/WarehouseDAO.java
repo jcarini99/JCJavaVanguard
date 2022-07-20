@@ -18,5 +18,8 @@ public interface WarehouseDAO {
 	//D
 	public void deleteWarehouse(Warehouse warehouse);
 //	public void deleteWarehouse(int id);
-	public void deleteManyWarehouses(int[] id);
+//	public void deleteManyWarehouses(int[] id);
+	
+	// EDGE CASE CHECK
+	public int findWarehouseCapacity(int warehouse_id);
 }

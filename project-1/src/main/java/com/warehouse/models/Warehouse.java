@@ -6,7 +6,7 @@ public class Warehouse {
 	private String name;
 	private int itemId;
 	private int itemQuantity;
-	
+
 	public Warehouse() {
 		super();
 	}
@@ -25,7 +25,7 @@ public class Warehouse {
 		this.itemId = itemId;
 		this.itemQuantity = itemQuantity;
 	}
-	
+
 	public Warehouse(int warehouseId, String name) {
 		super();
 		this.warehouseId = warehouseId;
@@ -74,7 +74,5 @@ public class Warehouse {
 		return "Warehouse [warehouseId=" + warehouseId + ", name=" + name + ", itemId=" + itemId + ", itemQuantity="
 				+ itemQuantity + "]";
 	}
-	
-	
-	
+
 }
