@@ -17,7 +17,7 @@ import com.warehouse.models.Item;
 import com.warehouse.models.NotFound;
 import com.warehouse.models.Warehouse;
 
-@WebServlet(urlPatterns = { "/warehouse/add/*", "/warehouse/get/*", "/warehouse/delete/*", "/warehouse/update/*" })
+@WebServlet(urlPatterns = { "/warehouse/add/", "/warehouse/get/*", "/warehouse/deleteWI/", "/warehouse/update/" })
 public class WarehouseServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 8697948623649022156L;
@@ -39,10 +39,10 @@ public class WarehouseServlet extends HttpServlet {
 		try {
 			int id = Integer.parseInt(result);
 
-			Warehouse warehouse = dao.findById(id);
-			if (warehouse != null) {
+			List<Warehouse> warehouses = dao.findById(id);
+			if (warehouses != null) {
 				resp.setContentType("application/json"); // Tells Postman that file is JSON
-				resp.getWriter().print(mapper.writeValueAsString(warehouse)); // Use ObjectMapper
+				resp.getWriter().print(mapper.writeValueAsString(warehouses)); // Use ObjectMapper
 			} else {
 				resp.setStatus(404); // Sets response as not found error
 				resp.getWriter()
@@ -51,10 +51,10 @@ public class WarehouseServlet extends HttpServlet {
 			}
 		} catch (NumberFormatException e) {
 
-			Warehouse warehouse = dao.findByName(result);
-			if (warehouse != null) {
+			List<Warehouse> warehouses = dao.findByName(result);
+			if (warehouses != null) {
 				resp.setContentType("application/json"); // Tells Postman that file is JSON
-				resp.getWriter().print(mapper.writeValueAsString(warehouse)); // Use ObjectMapper
+				resp.getWriter().print(mapper.writeValueAsString(warehouses)); // Use ObjectMapper
 			} else {
 				resp.setStatus(404); // Sets response as not found error
 				resp.getWriter()
@@ -124,7 +124,7 @@ public class WarehouseServlet extends HttpServlet {
 		// Read Delete Request
 		InputStream request = req.getInputStream();
 		Warehouse warehouse = mapper.readValue(request, Warehouse.class); // Use ObjectMapper
-		dao.deleteWarehouse(warehouse);
+		dao.deleteWarehouseItem(warehouse);
 		try {
 			resp.setStatus(200); // Sets response as successful
 		} catch (Exception e) {

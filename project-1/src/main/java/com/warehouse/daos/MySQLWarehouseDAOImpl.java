@@ -57,8 +57,9 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO {
 	 *         specified by id if found. null returned if item not found
 	 */
 	@Override
-	public Warehouse findById(int warehouse_id) {
+	public List<Warehouse> findById(int warehouse_id) {
 		String sql = "SELECT warehouse_id Warehouse_ID, warehouse_name Name, item_id Item_ID, item_quantity, Item_Quantity FROM warehouse WHERE warehouse_id = ?;";
+		LinkedList<Warehouse> warehouses = new LinkedList<>();
 		try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
 			// Create PreparedStatement using Connection object
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -66,9 +67,13 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO {
 			// Exectute query to return ResultSet of all values returned
 			ResultSet rs = ps.executeQuery();
 			// Parse ResultSet
-			if (rs.next()) {
-				return new Warehouse(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4));
+			while (rs.next()) {
+				// Loop over rows of ResultSet
+				Warehouse warehouse = new Warehouse(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4));
+				warehouses.add(warehouse);
 			}
+
+			return warehouses;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -83,8 +88,9 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO {
 	 *         specified by name if found. null returned if item not found
 	 */
 	@Override
-	public Warehouse findByName(String name) {
+	public List<Warehouse> findByName(String name) {
 		String sql = "SELECT warehouse_id Warehouse_ID, warehouse_name Name, item_id Item_ID, item_quantity, Item_Quantity FROM warehouse WHERE warehouse_name = ?;";
+		LinkedList<Warehouse> warehouses = new LinkedList<>();
 		try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
 			// Create PreparedStatement using Connection object
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -92,9 +98,13 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO {
 			// Exectute query to return ResultSet of all values returned
 			ResultSet rs = ps.executeQuery();
 			// Parse ResultSet
-			if (rs.next()) {
-				return new Warehouse(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4));
+			while (rs.next()) {
+				// Loop over rows of ResultSet
+				Warehouse warehouse = new Warehouse(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getInt(4));
+				warehouses.add(warehouse);
 			}
+
+			return warehouses;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -155,7 +165,7 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO {
 			// Create PreparedStatement using Connection object
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, warehouse.getName());
-			ps.setInt(2, warehouse.getItemId());
+			ps.setInt(2, warehouse.getWarehouseId());
 			// Exectute update to return int of all rows affected
 			int rowsAffected = ps.executeUpdate();
 			if (rowsAffected != 0) {
@@ -223,11 +233,37 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO {
 			e.printStackTrace();
 		}
 	}
-
-
+	
 	/**
 	 * Delete
-	 *  *Unimplemented - decided it was a redundant method*
+	 * 
+	 * @return delete item in warehouse by warehouse_id and item_id
+	 */
+	@Override
+	public void deleteWarehouseItem(Warehouse warehouse) {
+		String sql = "DELETE FROM warehouse WHERE warehouse_id = ? AND item_id = ?";
+		try (Connection conn = WarehouseDBCreds.getInstance().getConnection();) {
+			// Start transaction
+			conn.setAutoCommit(false);
+			// Create PreparedStatement using Connection object
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, warehouse.getWarehouseId());
+			ps.setInt(2, warehouse.getItemId());
+			// Exectute update to return int of all rows affected
+			int rowsAffected = ps.executeUpdate();
+			if (rowsAffected != 0) {
+				conn.commit(); // Execute all queries in transaction if success
+			} else {
+				conn.rollback(); // Undo all queries in transaction if failure
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Delete *Unimplemented - decided it was a redundant method*
+	 * 
 	 * @return delete entire warehouse by warehouse_id
 	 */
 //	@Override
@@ -253,8 +289,9 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO {
 //	}
 
 	/**
-	 * Delete
-	 *  *Unimplemented - decided it was a dangerous method to add to my web page*
+	 * Delete *Unimplemented - decided it was a dangerous method to add to my web
+	 * page*
+	 * 
 	 * @return delete multiple warehouses by array of warehouse_id
 	 */
 //	@Override
@@ -279,7 +316,6 @@ public class MySQLWarehouseDAOImpl implements WarehouseDAO {
 //			}
 //		}
 
-	
 	@Override
 	public int findWarehouseCapacity(int warehouse_id) {
 		String sql = "SELECT SUM(item_quantity) AS warehouse_capacity FROM warehouse WHERE warehouse_id = ? GROUP BY warehouse_id;";

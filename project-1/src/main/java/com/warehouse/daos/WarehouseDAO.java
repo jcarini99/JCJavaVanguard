@@ -10,13 +10,14 @@ public interface WarehouseDAO {
 	public Warehouse createWarehouseItem(Warehouse warehouse);
 	//R
 	public List<Warehouse> findAllWarehouses();
-	public Warehouse findById(int warehouse_id);
-	public Warehouse findByName(String name);
+	public List<Warehouse> findById(int warehouse_id);
+	public List<Warehouse> findByName(String name);
 	//U
 	public void updateItemQuantity(Warehouse warehouse);
 	public void updateWarehouseName(Warehouse warehouse);
 	//D
 	public void deleteWarehouse(Warehouse warehouse);
+	public void deleteWarehouseItem(Warehouse warehouse);
 //	public void deleteWarehouse(int id);
 //	public void deleteManyWarehouses(int[] id);
 	

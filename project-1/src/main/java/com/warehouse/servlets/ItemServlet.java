@@ -16,7 +16,7 @@ import com.warehouse.daos.MySQLItemDAOImpl;
 import com.warehouse.models.Item;
 import com.warehouse.models.NotFound;
 
-@WebServlet(urlPatterns = { "/item/add/*", "/item/get/*", "/item/delete/*", "/item/update/*" })
+@WebServlet(urlPatterns = { "/item/add/", "/item/get/*", "/item/delete/", "/item/update/" })
 public class ItemServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 6604739040895145458L;

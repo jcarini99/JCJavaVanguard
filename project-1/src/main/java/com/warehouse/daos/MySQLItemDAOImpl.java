@@ -25,6 +25,8 @@ public class MySQLItemDAOImpl implements ItemDAO{
 	 */
 	
 	/** 
+	 * Read
+	 * 
 	 * @return item_id and name  of all Items if found. 
 	 * null returned if item not found
 	 */
@@ -54,6 +56,8 @@ public class MySQLItemDAOImpl implements ItemDAO{
 	}
 
 	/** 
+	 * Read
+	 * 
 	 * @return item_id and name of Item using specified item_id if found. 
 	 * null returned if item not found  
 	 */
@@ -79,6 +83,8 @@ public class MySQLItemDAOImpl implements ItemDAO{
 	}
 
 	/**
+	 * Read
+	 * 
 	 * @return Reads item_id as ID and item_name as Name from specified item_name if found. 
 	 * null returned if item not found 
 	 */
@@ -103,7 +109,11 @@ public class MySQLItemDAOImpl implements ItemDAO{
 		return null;
 	}
 
-	//Creates item_name at auto incremented item_id
+	/**
+	 * Create
+	 * 
+	 * @return item_name at auto incremented item_id
+	 */
 	@Override
 	public Item createItem(Item item) {
 		String sql = "INSERT INTO item (item_id,item_name) VALUES (?,?)";
@@ -135,7 +145,11 @@ public class MySQLItemDAOImpl implements ItemDAO{
 		return null;
 	}
 
-	//Updates item_name at specified item_id
+	/**
+	 * Update
+	 * 
+	 * @return item_name at specified item_id
+	 */
 	@Override
 	public void updateItemName(Item item) {
 		String sql = "UPDATE item SET item_name = ? WHERE item_id = ?";
@@ -158,7 +172,11 @@ public class MySQLItemDAOImpl implements ItemDAO{
 		}
 	}
 
-	//Deletes one row (item) at specified item_id
+	/**
+	 * Delete
+	 * 
+	 * @return one row (item) at specified item_id
+	 */
 	@Override
 	public void deleteItem(Item item) {
 		String sql = "DELETE FROM item WHERE item_id = ?";
@@ -180,7 +198,11 @@ public class MySQLItemDAOImpl implements ItemDAO{
 		}		
 	}
 
-	//Deletes one row (item) at specified item_id
+	/*
+	 * Deletes one row (item) at specified item_id
+	 * -Unimplemented for redundancy
+	 */
+	
 //	@Override
 //	public void deleteItem(int id) {
 //		String sql = "DELETE FROM item WHERE item_id = ?";
@@ -203,7 +225,10 @@ public class MySQLItemDAOImpl implements ItemDAO{
 //		
 //	}
 
-	//Deletes multiple rows (items) at item_id specified by id array
+	/*
+	 * Deletes multiple rows (items) at item_id specified by id array
+	 * -Unimplemented for safety of DB
+	 */
 //	@Override
 //	public void deleteManyItems(int[] id) {
 //		for(int i : id) {
