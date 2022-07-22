@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warehouse App</title>
+</head>
+<body class="container">
+<span style="grid-column:1/11" class="header big-text">Warehouse App</span>        
+
+<app-warehouse-list style="grid-column:2/5"> </app-warehouse-list>
+<app-item-list class="card" style="grid-column:7/10"> </app-item-list>
+
+<div style="grid-column:2/5" class="buttonposition">
+    <button pButton (onClick)="toggleFWCollapse()" [ngStyle]="{backgroundColor:'var(--gray-200)'}">Find Warehouse</button>
+    <div *ngIf="findWarehouseDiv"><app-find-warehouse> </app-find-warehouse> </div>
+</div>
+
+<div style="grid-column:7/10" class="buttonposition">
+    <button pButton (click)="toggleFICollapse()" [ngStyle]="{backgroundColor:'var(--gray-200)'}">Find Item</button>
+    <div *ngIf="findItemDiv"><app-find-item> </app-find-item></div>  
+</div>
+
+<div style="grid-column:2/5" class="buttonposition">
+    <button pButton (click)="toggleCWCollapse()" [ngStyle]="{backgroundColor:'var(--gray-200)'}">Create Warehouse</button>
+    <div *ngIf="createWarehouseDiv"><app-create-warehouse></app-create-warehouse></div>   
+</div>
+
+<div style="grid-column:7/10" class="buttonposition">
+    <button pButton (click)="toggleCICollapse()" [ngStyle]="{backgroundColor:'var(--gray-200)'}">Create Item</button>
+    <div *ngIf="createItemDiv"><app-create-item> </app-create-item></div>
+</div>
+
+<div style="grid-column:2/5" class="buttonposition">
+    <button pButton (click)="toggleUWCollapse()" [ngStyle]="{backgroundColor:'var(--gray-200)'}">Update Warehouse</button>    
+    <div *ngIf="updateWarehouseDiv"><app-update-warehouse> </app-update-warehouse></div>
+</div>
+
+<div style="grid-column:7/10" class="buttonposition">
+    <button pButton (click)="toggleUICollapse()" [ngStyle]="{backgroundColor:'var(--gray-200)'}">Update Item</button>
+    <div *ngIf="updateItemDiv"><app-update-item></app-update-item></div>
+</div>
+
+<div style="grid-column:2/5" class="buttonposition">
+    <button pButton (click)="toggleDWCollapse()" [ngStyle]="{backgroundColor:'var(--gray-200)'}">Delete Warehouse</button>
+    <div *ngIf="deleteWarehouseDiv"><app-delete-warehouse> </app-delete-warehouse></div>
+</div>
+
+<div style="grid-column:7/10" class="buttonposition">
+    <button pButton (click)="toggleDICollapse()" [ngStyle]="{backgroundColor:'var(--gray-200)'}">Delete Item</button>
+    <div *ngIf="deleteItemDiv"><app-delete-item> </app-delete-item></div>
+</div>
+
+
+</body>
+</html>

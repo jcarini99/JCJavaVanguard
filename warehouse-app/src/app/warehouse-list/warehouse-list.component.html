@@ -1,0 +1,15 @@
+ <table class="table">    
+    <p-table [value]="warehouses">
+        <ng-template pTemplate="header">
+            <th>Warehouse ID</th><th>Warehouse Name</th><th>Item ID</th><th>Item Quantity</th>
+        </ng-template>
+        <ng-template pTemplate="body" let-warehouse>
+            <tr>
+                <td>{{warehouse.warehouseId}}</td>
+                <td>{{warehouse.name}}</td>
+                <td>{{warehouse.itemId}}</td>
+                <td>{{warehouse.itemQuantity}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+ </table>

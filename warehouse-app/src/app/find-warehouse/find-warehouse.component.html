@@ -1,0 +1,22 @@
+<table class="table">
+    <h3>Find Warehouse</h3>
+    <label for="searchId">Search by Id or Name </label>
+    <input pInputText type="any" name="searchId" [(ngModel)]="searchId" (change)="onChange()"/>
+    <button pButton label="Submit" [ngStyle]="{backgroundColor:'var(--teal-500)'}"></button>
+
+    <table *ngIf = "warehouses[0]">
+        <p-table [value]="warehouses">
+            <ng-template pTemplate="header" class="ui-datatable myTable">
+                <th>Warehouse ID</th><th>Warehouse Name</th><th>Item ID</th><th>Item Quantity</th>
+            </ng-template>
+            <ng-template pTemplate="body" let-warehouse>
+                <tr>
+                    <td>{{warehouse.warehouseId}}</td>
+                    <td>{{warehouse.name}}</td>
+                    <td>{{warehouse.itemId}}</td>
+                    <td>{{warehouse.itemQuantity}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </table>
+</table>

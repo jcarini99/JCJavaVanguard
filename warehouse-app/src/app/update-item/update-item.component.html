@@ -1,0 +1,12 @@
+<form class="table" (submit)="submit(item)">
+    <h3>Update Item</h3>
+        <p>
+            <label for="itemId">Item ID </label>
+            <input pInputText type="number" name="itemId" [(ngModel)]="item.id"/>
+        </p>
+        <p>
+            <label for="itemName"> Item Name </label>
+            <input pInputText type="text" name="itemName" [(ngModel)]="item.name"/>
+        </p>
+        <button pButton label="Submit" [ngStyle]="{backgroundColor:'var(--teal-500)'}"></button>
+</form>
