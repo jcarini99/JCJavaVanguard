@@ -1,5 +1,5 @@
-<table class="table">
-    <h3>Find Warehouse</h3>
+<form class="table">
+    <h3>Find a Warehouse in the Warehouse List</h3>
     <label for="searchId">Search by Id or Name </label>
     <input pInputText type="any" name="searchId" [(ngModel)]="searchId" (change)="onChange()"/>
     <button pButton label="Submit" [ngStyle]="{backgroundColor:'var(--teal-500)'}"></button>
@@ -19,4 +19,4 @@
             </ng-template>
         </p-table>
     </table>
-</table>
+</form>

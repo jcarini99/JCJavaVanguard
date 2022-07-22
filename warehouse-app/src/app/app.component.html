@@ -7,13 +7,16 @@
     <title>Warehouse App</title>
 </head>
 <body class="container">
-<span style="grid-column:1/11" class="header big-text">Warehouse App</span>        
+    <span style="grid-column:1/11" class="header big-text">Warehouse App</span>
+        
 
-<app-warehouse-list style="grid-column:2/5"> </app-warehouse-list>
-<app-item-list class="card" style="grid-column:7/10"> </app-item-list>
+<app-warehouse-list style="grid-column:2/6"> </app-warehouse-list>
+<div class="cardposition" style="grid-column:7/10">
+    <app-item-list > </app-item-list>
+</div>
 
 <div style="grid-column:2/5" class="buttonposition">
-    <button pButton (onClick)="toggleFWCollapse()" [ngStyle]="{backgroundColor:'var(--gray-200)'}">Find Warehouse</button>
+    <button pButton (click)="toggleFWCollapse()" [ngStyle]="{backgroundColor:'var(--gray-200)'}">Find Warehouse</button>
     <div *ngIf="findWarehouseDiv"><app-find-warehouse> </app-find-warehouse> </div>
 </div>
 

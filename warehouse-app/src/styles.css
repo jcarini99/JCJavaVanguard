@@ -19,16 +19,21 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .header {   
+    height: 75px;
+    background-color: rgb(223, 108, 0);
+    opacity: .9;
+    padding: 10px;
+    border: solid #5c3c00 2px;
+    border-radius: 5px;
     justify-content: center;
     align-content: center;
     text-align: center;
     color: black;
-    position: sticky;
-    background-color: rgb(223, 108, 0);
-    opacity: .9;
-    padding: 5px;
-    border: 5px;
-    border-radius: 5px;
+    padding: 0 10px;
+    white-space: normal;
+    word-break: break-word;
+    display: flex;
+    align-items: center;
 }
 
 .big-text {
@@ -37,6 +42,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .buttonposition {
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+}
+
+.cardposition {
     justify-content: center;
     align-items: center;
     align-content: center;

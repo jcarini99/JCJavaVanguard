@@ -11,10 +11,10 @@
         <button pButton label="Submit" [ngStyle]="{backgroundColor:'var(--teal-500)'}"></button>
 </form> -->
 
-<table class="table">
-    <h3>Delete Item</h3>
-    <label for="searchId">Item ID </label>
+<form class="table">
+    <h3>Remove an Item from the Item List</h3>
+    <label for="searchId">Item ID or Name </label>
     <input pInputText type="any" name="searchId" [(ngModel)]="searchId" (change)="onDelete()"/>
     <button pButton label="Submit" [ngStyle]="{backgroundColor:'var(--teal-500)'}"></button>
    
-</table>
+</form>

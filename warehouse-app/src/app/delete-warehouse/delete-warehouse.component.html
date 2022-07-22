@@ -1,41 +1,21 @@
 <form class="table" (submit)="deleteW(warehouse)">
-    <h3>Delete Warehouse</h3>
+    <h3>Remove an Entire Warehouse from the Warehouse List</h3>
         <p>
             <label for = "warehouseId"> Warehouse ID </label>
             <input pInputText type="number" name="warehouseId" [(ngModel)]="warehouse.warehouseId"/>
-        </p>
-        <p>
-            <label for="warehouseName"> Warehouse Name </label>
-            <input pInputText type="text" name="warehouseName" [(ngModel)]="warehouse.name"/>
-        </p>
-        <p>
-            <label for="itemId"> Item ID </label>
-            <input pInputText type="number" name="itemId" [(ngModel)]="warehouse.itemId"/>
-        </p>
-        <p>
-            <label for="itemQuantity"> Item Quantity </label>
-            <input pInputText type="number" name="itemQuantity" [(ngModel)]="warehouse.itemQuantity"/>
         </p>
         <button pButton label="Submit" [ngStyle]="{backgroundColor:'var(--teal-500)'}"></button>
     </form>
     
 <form class="table" (submit)="deleteWI(warehouse)">
-    <h3>Delete Item in Warehouse</h3>
+    <h3>Remove an Item from a Warehouse</h3>
         <p>
             <label for = "warehouseId"> Warehouse ID </label>
             <input pInputText type="number" name="warehouseId" [(ngModel)]="warehouse.warehouseId"/>
         </p>
         <p>
-            <label for="warehouseName"> Warehouse Name </label>
-            <input pInputText type="text" name="warehouseName" [(ngModel)]="warehouse.name"/>
-        </p>
-        <p>
             <label for="itemId"> Item ID </label>
             <input pInputText type="number" name="itemId" [(ngModel)]="warehouse.itemId"/>
-        </p>
-        <p>
-            <label for="itemQuantity"> Item Quantity </label>
-            <input pInputText type="number" name="itemQuantity" [(ngModel)]="warehouse.itemQuantity"/>
         </p>
         <button pButton label="Submit" [ngStyle]="{backgroundColor:'var(--teal-500)'}"></button>
     </form>

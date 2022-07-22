@@ -7,38 +7,38 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'warehouse-app';
-  findWarehouseDiv :boolean = true;
-  findItemDiv :boolean = true;
-  createWarehouseDiv :boolean = true;
-  createItemDiv :boolean = true;
-  updateWarehouseDiv :boolean = true;
-  updateItemDiv :boolean = true;
-  deleteWarehouseDiv :boolean = true;
-  deleteItemDiv :boolean = true;
+  findWarehouseDiv :boolean = false;
+  findItemDiv :boolean = false;
+  createWarehouseDiv :boolean = false;
+  createItemDiv :boolean = false;
+  updateWarehouseDiv :boolean = false;
+  updateItemDiv :boolean = false;
+  deleteWarehouseDiv :boolean = false;
+  deleteItemDiv :boolean = false;
 
   toggleFWCollapse() {
-    this.findWarehouseDiv !=this.findWarehouseDiv;
+    this.findWarehouseDiv = !this.findWarehouseDiv;
   }
   toggleFICollapse() {
-    this.findItemDiv !=this.findItemDiv;
+    this.findItemDiv = !this.findItemDiv;
   }
   toggleCWCollapse() {
-    this.createWarehouseDiv !=this.createWarehouseDiv;
+    this.createWarehouseDiv = !this.createWarehouseDiv;
   }
   toggleCICollapse() {
-    this.createItemDiv !=this.createItemDiv;
+    this.createItemDiv = !this.createItemDiv;
   }
   toggleUWCollapse() {
-    this.updateWarehouseDiv !=this.updateWarehouseDiv;
+    this.updateWarehouseDiv = !this.updateWarehouseDiv;
   }
   toggleUICollapse() {
-    this.updateItemDiv !=this.updateItemDiv;
+    this.updateItemDiv = !this.updateItemDiv;
   }
   toggleDWCollapse() {
-    this.deleteWarehouseDiv !=this.deleteWarehouseDiv;
+    this.deleteWarehouseDiv = !this.deleteWarehouseDiv;
   }
   toggleDICollapse() {
-    this.deleteItemDiv !=this.deleteItemDiv;
+    this.deleteItemDiv = !this.deleteItemDiv;
   }
 
 }
